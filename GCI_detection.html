@@ -13089,7 +13089,7 @@ div#notebook {
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -14089,6 +14089,25 @@ Mean CV score: 97.26% +/- 0.30%
 </tr>
 </tbody>
 </table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>GCIs detected by different methods are stored in the <code>data/cmu/&lt;voice&gt;</code> folder where <code>&lt;voice&gt;</code> is one of the voices we experimented with: <code>bdl</code>, <code>slt</code>, <code>ked</code>.</p>
+<p>The name of the compressed file with GCIs is as follow:</p>
+<p><code>&lt;voice&gt;_&lt;method&gt;_&gt;type&gt;_gci</code></p>
+<ul>
+<li><code>&lt;voice&gt;</code>  ...  a voice (<code>bdl</code>, <code>slt</code>, <code>ked</code>)</li>
+<li><code>&lt;method&gt;</code> ... GCI detection method (<code>dypsa</code>, <code>mmf</code>, <code>reaper</code>, <code>sedreams</code>, <code>xgb</code>)</li>
+<li><code>&lt;type&gt;</code>   ... GCI type (original vs. postprocessed)<ul>
+<li><code>orig</code> ... original GCIs as detected by each method</li>
+<li><code>post</code> ... postprocessed GCIs (V/U filtering, syncing with neighboring minimum negative sample)</li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>
