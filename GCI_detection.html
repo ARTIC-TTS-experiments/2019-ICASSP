@@ -13116,7 +13116,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">&#182;</a></h1><p><p><div class="lev1 toc-item"><a href="#Using-extreme-gradient-boosting-to-detect-glottal-closure-instants-in-speech-signal" data-toc-modified-id="Using-extreme-gradient-boosting-to-detect-glottal-closure-instants-in-speech-signal-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Using extreme gradient boosting to detect glottal closure instants in speech signal</a></div><div class="lev2 toc-item"><a href="#Training-and-evaluating-the-classifier-on-UWB-data" data-toc-modified-id="Training-and-evaluating-the-classifier-on-UWB-data-11"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>Training and evaluating the classifier on UWB data</a></div><div class="lev2 toc-item"><a href="#CMU-data" data-toc-modified-id="CMU-data-12"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>CMU data</a></div></p>
+<h1 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">&#182;</a></h1><p><p><div class="lev1 toc-item"><a href="#Using-extreme-gradient-boosting-to-detect-glottal-closure-instants-in-speech-signal" data-toc-modified-id="Using-extreme-gradient-boosting-to-detect-glottal-closure-instants-in-speech-signal-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Using extreme gradient boosting to detect glottal closure instants in speech signal</a></div><div class="lev2 toc-item"><a href="#Training-and-evaluating-the-classifier-on-UWB-data" data-toc-modified-id="Training-and-evaluating-the-classifier-on-UWB-data-11"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>Training and evaluating the classifier on UWB data</a></div><div class="lev2 toc-item"><a href="#CMU-data" data-toc-modified-id="CMU-data-12"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>CMU data</a></div><div class="lev2 toc-item"><a href="#GCI-detection-evaluation" data-toc-modified-id="GCI-detection-evaluation-13"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>GCI detection evaluation</a></div></p>
 
 </div>
 </div>
@@ -14098,7 +14098,7 @@ Mean CV score: 97.26% +/- 0.30%
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>GCIs detected by different methods are stored in the <code>data/cmu/&lt;voice&gt;</code> folder where <code>&lt;voice&gt;</code> is one of the voices we experimented with: <code>bdl</code>, <code>slt</code>, <code>ked</code>.</p>
 <p>The name of the compressed file with GCIs is as follow:</p>
-<p><code>&lt;voice&gt;_&lt;method&gt;_&gt;type&gt;_gci</code></p>
+<p><code>&lt;voice&gt;_&lt;method&gt;_&lt;type&gt;_gci</code></p>
 <ul>
 <li><code>&lt;voice&gt;</code>  ...  a voice (<code>bdl</code>, <code>slt</code>, <code>ked</code>)</li>
 <li><code>&lt;method&gt;</code> ... GCI detection method (<code>dypsa</code>, <code>mmf</code>, <code>reaper</code>, <code>sedreams</code>, <code>xgb</code>)</li>
@@ -14108,6 +14108,80 @@ Mean CV score: 97.26% +/- 0.30%
 </ul>
 </li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="GCI-detection-evaluation">GCI detection evaluation<a class="anchor-link" href="#GCI-detection-evaluation">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here is an example of the evaluation of GCI detection in terms of identification rate (IDR), miss rate (MR), false alarm rate (FAR), identification rate (IDA), and accuracy within 0.25 ms range (A25).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+<span class="nb">cd</span> evaluation
+./gci_eval.py pm_ref pm_post &gt; eval_results.csv
+<span class="nb">cd</span> ..
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>INFO       arctic_a0001        : IDR = 87.64%
+INFO       arctic_a0002        : IDR = 88.47%
+INFO       arctic_a0003        : IDR = 91.32%
+INFO       TOTAL               : IDR = 89.18%
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>pm_ref</code> ... directory with reference GCIs</li>
+<li><code>pm_post</code> ... directory with detected (and postprocessed) GCIs</li>
+<li><code>eval_results.csv</code> ... results for each utterance from <code>pm_ref</code> and <code>pm_post</code> directories, and total GCI detection results for all uterances</li>
+</ul>
+<p>The script <code>gci_eval.py</code> depends on the following scripts (all of them are included in the <code>evaluation</code> folder):</p>
+<ul>
+<li><code>gci_detect_clf</code></li>
+<li><code>gci_utils.py</code></li>
+<li><code>pm.py</code></li>
+<li><code>pm_compare.py</code></li>
+</ul>
+<p>Any of the <code>&lt;voice&gt;_&lt;method&gt;_post_gci</code> and the corresponding <code>&lt;voice&gt;_ref_gci</code> directories (after decompressing from <code>data/cmu/&lt;voice&gt;</code>) can be used to reproduce the results described in the <a href="paper/matousek_ICASSP2019_paper.pdf">paper</a>.</p>
+<p>For instance, the results for the BDL voice and SEDREAMS method can be obtained by calling:</p>
+<p><code>./gci_eval.py bdl_ref_gci bdl_sedreams_post_gci &gt; eval_results.csv</code></p>
 
 </div>
 </div>
