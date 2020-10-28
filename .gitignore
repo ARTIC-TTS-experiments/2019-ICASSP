@@ -1,0 +1,12 @@
+# Ignore the .direnv directory with local python installation
+.direnv/
+
+# Ignore temporarily Jupyter notebook directories & files
+.ipynb_checkpoints
+
+# Ignore python temporarily directory
+__pycache__
+
+# MacOS garbage
+Icon[\r]
+Icon?
